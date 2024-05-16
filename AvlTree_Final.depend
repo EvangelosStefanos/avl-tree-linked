@@ -1,0 +1,51 @@
+# depslib dependency file v1.0
+1508922499 source:c:\users\steve\documents\codeblocks\avltree_final\avltree.cpp
+	"AvlTree.h"
+	<iostream>
+	"Btn.h"
+	<vector>
+	<fstream>
+
+1465160542 c:\users\steve\documents\codeblocks\avltree_final\avltree.h
+	<iostream>
+	"Btn.h"
+
+1465143412 c:\users\steve\documents\codeblocks\avltree_final\btn.h
+	<iostream>
+
+1465143440 source:c:\users\steve\documents\codeblocks\avltree_final\btn.cpp
+	"Btn.h"
+	<iostream>
+
+1508922156 source:c:\users\steve\documents\codeblocks\avltree_final\main.cpp
+	<iostream>
+	<fstream>
+	<cstring>
+	"Btn.h"
+	"AvlTree.h"
+
+1715682167 source:c:\users\steve\desktop\avltree_final\avltree.cpp
+	"AvlTree.h"
+	<iostream>
+	"Btn.h"
+	<vector>
+	<fstream>
+
+1715682168 c:\users\steve\desktop\avltree_final\avltree.h
+	<iostream>
+	"Btn.h"
+
+1715682168 c:\users\steve\desktop\avltree_final\btn.h
+	<iostream>
+
+1715682168 source:c:\users\steve\desktop\avltree_final\btn.cpp
+	"Btn.h"
+	<iostream>
+
+1715682168 source:c:\users\steve\desktop\avltree_final\main.cpp
+	<iostream>
+	<fstream>
+	<cstring>
+	"Btn.h"
+	"AvlTree.h"
+

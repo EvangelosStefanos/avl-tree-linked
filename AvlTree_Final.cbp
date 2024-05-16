@@ -32,15 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="AvlTree.cpp" />
-		<Unit filename="AvlTree.h" />
-		<Unit filename="Btn.cpp" />
-		<Unit filename="Btn.h" />
-		<Unit filename="main.cpp" />
-		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-		</Extensions>
+		<Unit filename="src/AvlTree.cpp" />
+		<Unit filename="src/AvlTree.h" />
+		<Unit filename="src/Btn.cpp" />
+		<Unit filename="src/Btn.h" />
+		<Unit filename="src/main.cpp" />
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

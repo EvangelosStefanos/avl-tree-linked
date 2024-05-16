@@ -1,8 +1,8 @@
-#include "AvlTree.h"
 #include <iostream>
-#include "Btn.h"
-#include <vector>
 #include <fstream>
+#include <vector>
+#include "AvlTree.h"
+#include "Btn.h"
 
 using namespace std;
 
@@ -37,23 +37,25 @@ exist in the tree, otherwise returns the node with that value.
 **/
 Btn* AvlTree::searcht(int key)
 {
-
     if(!this->root)
     {
         return NULL;
     }
-
     Btn *sn = this->root;
     while(sn)
     {
         if(key == sn->getKey())
+        {
             return sn;
-
+        }
         else if(key < sn->getKey())
+        {
             sn = sn->getLeftChild();
-
+        }
         else if(key > sn->getKey())
+        {
             sn = sn->getRightChild();
+        }
     }
     return NULL;
 }
@@ -72,6 +74,7 @@ Btn* AvlTree::addElement(int akey)
     if(!snode) //Tree is empty
     {
         snode = new Btn(akey);
+        this->sizet++; // Increase the size of the tree
         this->root = snode;
         return snode;
     }
@@ -80,20 +83,23 @@ Btn* AvlTree::addElement(int akey)
         snp = snode;
         path.push_back(snode);
 
-        if(akey < snode->getKey())
-            snode = snode->getLeftChild();
-
-        else if(akey > snode->getKey())
-            snode = snode->getRightChild();
-
-        else if (akey == snode->getKey())
+        if (akey == snode->getKey())
         {
-            cout << "Node with key " << akey << " already exists." <<endl;
-            return NULL;
+          cout << "Node with key " << akey << " already exists." << endl;
+          return NULL;
+        }
+        else if (akey < snode->getKey())
+        {
+            snode = snode->getLeftChild();
+        }
+        else if(akey > snode->getKey())
+        {
+            snode = snode->getRightChild();
         }
     }
 
     snode = new Btn(akey);
+    this->sizet++; // Increase the size of the tree
     path.push_back(snode);
 
     if(akey < snp->getKey()) //Set new node as left child
@@ -137,7 +143,6 @@ Btn* AvlTree::addElement(int akey)
             break;
         }
     }
-    this->sizet++; //Increase the size of the tree
     return snode;
 }
 
@@ -262,43 +267,6 @@ bool AvlTree::deleteElement(int akey)
     }
     this->sizet--;
     return true;
-}
-
-
-/**
-Given two values n and akey, adds n to the primary tree(if it doesn't exist already)
-and then adds akey to its neighbors(if it doesn't exist already).
-**/
-void AvlTree::addNeighbor(int n, int akey)
-{
-    Btn* nn = searcht(n); // Search for the first node
-    if(!nn)
-        nn = addElement(n); // If not found, add it to the primary tree
-
-    if(!nn->getNeighborhood())
-        nn->setNeighborhood(new AvlTree(akey)); // If node has no neighborhood, create one and add neighbor as root
-
-    else
-        nn->getNeighborhood()->addElement(akey); // Add neighbor to the neighborhood
-}
-
-
-/**
-Given two values n and akey, deletes akey from n's neighborhood(if it exists).
-**/
-void AvlTree::delNeighbor(int n, int akey)
-{
-    Btn* nn = searcht(n); // Search for the first node
-    if(!nn)
-        return;  // If not found, return
-
-    if(!nn->getNeighborhood()) // If node has no neighborhood, return
-        return;
-
-    if(!(nn->getNeighborhood()->searcht(akey))) // If neighbor isn't in the neighborhood, return
-        return;
-
-    nn->getNeighborhood()->deleteElement(akey); //  Neighbor is in the neighborhood so delete it
 }
 
 
@@ -459,10 +427,10 @@ void AvlTree::PostOrderPrint(Btn *r)
 /**
 Prints each node of a tree, the size of its neighborhood and the neighbor nodes to a file.
 **/
-void AvlTree::output()
+void AvlTree::output(std::string p)
 {
     ofstream f;
-    f.open("output.txt");
+    f.open(p);
     if(!f)
     {
         cerr<<"File problem"<<endl;

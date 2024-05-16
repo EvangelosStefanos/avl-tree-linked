@@ -1,7 +1,8 @@
 #ifndef AVLTREE_H
 #define AVLTREE_H
 #include <iostream>
-#include "Btn.h"
+
+class Btn;
 
 using namespace std;
 
@@ -15,9 +16,6 @@ class AvlTree
         Btn* searcht(int key);
         Btn* addElement(int key);
         bool deleteElement(int key);
-
-        void addNeighbor(int n, int akey);
-        void delNeighbor(int n, int akey);
 
         Btn* getRoot(){return root;};
         int findHeight(Btn *r);
@@ -35,7 +33,7 @@ class AvlTree
         void PreOrderPrint(Btn *root);
         void PostOrderPrint(Btn *root);
 
-        void output();
+        void output(std::string p);
         void pront(Btn *n, ostream &f);
         void pront2(Btn *n, ostream &f);
 

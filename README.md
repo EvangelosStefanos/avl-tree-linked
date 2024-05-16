@@ -17,5 +17,5 @@ For convenience a total of three sample files are provided. Two of them are inpu
   [output.txt](ouput.txt) Each line contains an integer, the number of integers linked to that integer and the linked integers themselves.
 
 ## Usage
-  Executables will be provided with each release. To use from an executable, open a terminal at the project root folder and enter `.\bin/Release/AvlTree_Final.exe` to run the program. Otherwise, you will have to compile the code and then run it on your own.
+  Executables will be provided with each release. To use from an executable, open a terminal in the directory it is located and enter `.\AvlTree_Final.exe` to run the program. The executable requires the input files `commands.txt` and `input.txt` to be in the same directory or it will not work. Otherwise, you will have to compile the code and then run it on your own.
   

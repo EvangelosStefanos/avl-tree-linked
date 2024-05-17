@@ -2,36 +2,48 @@
 #include "Btn.h"
 #include "AvlTree.h"
 
-Btn::Btn(int akey)
+template <class T>
+Btn<T>::Btn(T akey)
 {
   key = akey;
   balance = 0;
   leftchild = NULL;
   rightchild = NULL;
-  neighborhood = new AvlTree();
+  neighborhood = new AvlTree<T>();
 }
 
-Btn::~Btn(){delete this->neighborhood;}
+template <class T>
+Btn<T>::~Btn() { delete this->neighborhood; }
 
-int Btn::getKey() { return this->key; }
+template <class T>
+T Btn<T>::getKey() { return this->key; }
 
-Btn * Btn::getLeftChild() { return this->leftchild; }
+template <class T>
+Btn<T> * Btn<T>::getLeftChild() { return this->leftchild; }
 
-Btn * Btn::getRightChild() { return this->rightchild; }
+template <class T>
+Btn<T> * Btn<T>::getRightChild() { return this->rightchild; }
 
-AvlTree * Btn::getNeighborhood() { return this->neighborhood; }
+template <class T>
+AvlTree<T> * Btn<T>::getNeighborhood() { return this->neighborhood; }
 
-int Btn::getBalance() { return this->balance; }
+template <class T>
+int Btn<T>::getBalance() { return this->balance; }
 
-void Btn::setKey(int akey) { this->key = akey; }
+template <class T>
+void Btn<T>::setKey(T akey) { this->key = akey; }
 
-void Btn::setLeftChild(Btn *lc) { this->leftchild = lc; }
+template <class T>
+void Btn<T>::setLeftChild(Btn<T> * lc) { this->leftchild = lc; }
 
-void Btn::setRightChild(Btn *rc) { this->rightchild = rc; }
+template <class T>
+void Btn<T>::setRightChild(Btn<T> * rc) { this->rightchild = rc; }
 
-void Btn::setBalance(int b) { this->balance = b; }
+template <class T>
+void Btn<T>::setBalance(int b) { this->balance = b; }
 
-std::ostream &operator<<(std::ostream &output_stream, Btn &node)
+template <class T>
+std::ostream & operator<<(std::ostream & output_stream, Btn<T> & node)
 {
   output_stream << "Node : " << node.getKey();
   if (node.getLeftChild())
@@ -49,9 +61,10 @@ std::ostream &operator<<(std::ostream &output_stream, Btn &node)
   return output_stream;
 }
 
-bool Btn::hasNeighbor(int neighbor)
+template <class T>
+bool Btn<T>::hasNeighbor(T neighbor)
 {
-  if (this->neighborhood->searcht(neighbor))
+  if (this->neighborhood->search(neighbor))
   {
     std::cout << "Link already exists for " << key << " and " << neighbor << "." << std::endl;
     return true;
@@ -59,12 +72,14 @@ bool Btn::hasNeighbor(int neighbor)
   return false;
 }
 
-Btn * Btn::addNeighbor(int neighbor)
+template <class T>
+Btn<T> *Btn<T>::insertNeighbor(T neighbor)
 {
-  return this->neighborhood->addElement(neighbor); // Add neighbor to the neighborhood
+  return this->neighborhood->insertElement(neighbor); // Add neighbor to the neighborhood
 }
 
-bool Btn::delNeighbor(int neighbor)
+template <class T>
+bool Btn<T>::deleteNeighbor(T neighbor)
 {
   bool deleted = this->neighborhood->deleteElement(neighbor);
   if (!deleted)

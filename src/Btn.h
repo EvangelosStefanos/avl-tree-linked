@@ -2,39 +2,42 @@
 #define BTN_H
 #include <iostream>
 
+template <class T>
 class AvlTree;
 
+template <class T>
 class Btn
 {
   public:
-    Btn(int akey);
+    Btn(T akey);
     ~Btn();
 
-    int getKey();
-    Btn* getLeftChild();
-    Btn* getRightChild();
-    AvlTree* getNeighborhood();
+    T getKey();
+    Btn<T> * getLeftChild();
+    Btn<T> * getRightChild();
+    AvlTree<T> * getNeighborhood();
     int getBalance();
 
 
-    void setKey(int akey);
-    void setLeftChild(Btn *lc);
-    void setRightChild(Btn *rc);
+    void setKey(T akey);
+    void setLeftChild(Btn<T> * lc);
+    void setRightChild(Btn<T> * rc);
     void setBalance(int b);
 
-    friend std::ostream & operator<<(std::ostream & output_stream, Btn & node);
+    template <class Y>
+    friend std::ostream &operator<<(std::ostream &output_stream, Btn<Y> &node);
 
-    bool hasNeighbor(int neighbor);
-    Btn * addNeighbor(int neighbor);
-    bool delNeighbor(int neighbor);
+    bool hasNeighbor(T neighbor);
+    Btn<T> * insertNeighbor(T neighbor);
+    bool deleteNeighbor(T neighbor);
 
   protected:
   private:
-    int key;
+    T key;
     int balance;
-    Btn * leftchild;
-    Btn * rightchild;
-    AvlTree * neighborhood;
+    Btn<T> * leftchild;
+    Btn<T> * rightchild;
+    AvlTree<T> * neighborhood;
 };
 
 #endif // BTN_H

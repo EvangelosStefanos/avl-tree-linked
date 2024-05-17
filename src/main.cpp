@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include "Btn.h"
+#include "Btn.cpp"
 #include "AvlTree.h"
+#include "AvlTree.cpp"
 
 int main()
 {
@@ -9,7 +11,7 @@ int main()
   std::ifstream commands_stream(commands_path);
   if (!commands_stream)
   {
-    std::cout << commands_path << " did not open." << endl;
+    std::cout << commands_path << " did not open." << std::endl;
     return 0;
   }
 
@@ -21,7 +23,7 @@ int main()
   std::string command;
   int first;
   int second;
-  AvlTree *tree = new AvlTree();
+  AvlTree<int> *tree = new AvlTree<int>();
 
   while (commands_stream >> command)
   {
@@ -33,53 +35,53 @@ int main()
       std::ifstream input_stream(input_path);
       if (!input_stream)
       {
-        std::cout << input_path << " did not open." << endl;
+        std::cout << input_path << " did not open." << std::endl;
         return 0;
       }
 
       while (input_stream >> first >> second)
       {
-        Btn * node = tree->searcht(first);
+        Btn<int> *node = tree->search(first);
         if(!node)
         {
-          node = tree->addElement(first);
+          node = tree->insertElement(first);
         }
         if(!node->hasNeighbor(second))
         {
-          node->addNeighbor(second);
+          node->insertNeighbor(second);
         }
       }
     }
     else if (command == command_insert)
     {
       commands_stream >> first >> second;
-      Btn *node = tree->searcht(first);
+      Btn<int> *node = tree->search(first);
       if (!node)
       {
-        node = tree->addElement(first);
+        node = tree->insertElement(first);
       }
       if (!node->hasNeighbor(second))
       {
-        node->addNeighbor(second);
+        node->insertNeighbor(second);
       }
     }
     else if (command == command_delete)
     {
       commands_stream >> first >> second;
-      Btn *node = tree->searcht(first);
+      Btn<int> *node = tree->search(first);
       if (!node)
       {
-        std::cout << "Failed to delete link for " << first << " and " << second << ". " << first << " was not found." << std::endl;
+        std::cout << "INFO: No link deleted for " << first << " and " << second << ". " << first << " was not found." << std::endl;
       }
       else
       {
         if(!node->hasNeighbor(second))
         {
-          std::cout << "Failed to delete link for " << first << " and " << second << ". " << first << " is not linked with " << second << "." << std::endl;
+          std::cout << "INFO: No link deleted for " << first << " and " << second << ". Link does not exist." << std::endl;
         }
         else
         {
-          node->delNeighbor(second);
+          node->deleteNeighbor(second);
         }
       }
     }

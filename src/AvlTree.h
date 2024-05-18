@@ -3,45 +3,45 @@
 #include <iostream>
 
 template <class T>
-class Btn;
+class Node;
 
 template <class T>
-class AvlTree
+class AVLtree
 {
     public:
-        AvlTree();
-        AvlTree(T r);
-        ~AvlTree();
+        AVLtree();
+        AVLtree(T r);
+        ~AVLtree();
 
-        Btn<T> * search(T key);
-        Btn<T> * insertElement(T key);
+        Node<T> * search(T key);
+        Node<T> * insertElement(T key);
         bool deleteElement(T key);
 
-        Btn<T> * getRoot();
-        int findHeight(Btn<T> * r);
+        Node<T> * getRoot();
+        int findHeight(Node<T> * r);
 
-        int balance(Btn<T> * r);
-        void updateBalance(Btn<T> * n);
+        int balance(Node<T> * r);
+        void updateBalance(Node<T> * n);
 
-        void llRotation(Btn<T> * parent, Btn<T> * child, Btn<T> * pp);
-        void rrRotation(Btn<T> * parent, Btn<T> * child, Btn<T> * pp);
-        void lrRotation(Btn<T> * parent, Btn<T> * child, Btn<T> * pp);
-        void rlRotation(Btn<T> * parent, Btn<T> * child, Btn<T> * pp);
+        void llRotation(Node<T> * parent, Node<T> * child, Node<T> * pp);
+        void rrRotation(Node<T> * parent, Node<T> * child, Node<T> * pp);
+        void lrRotation(Node<T> * parent, Node<T> * child, Node<T> * pp);
+        void rlRotation(Node<T> * parent, Node<T> * child, Node<T> * pp);
 
-        void print(Btn<T> * r);
-        void InOrderPrint(Btn<T> * root);
-        void PreOrderPrint(Btn<T> * root);
-        void PostOrderPrint(Btn<T> * root);
+        void print(Node<T> * r);
+        void InOrderPrint(Node<T> * root);
+        void PreOrderPrint(Node<T> * root);
+        void PostOrderPrint(Node<T> * root);
 
         void output(std::string p);
-        void pront(Btn<T> * n, std::ostream & f);
-        void pront2(Btn<T> * n, std::ostream & f);
+        void pront(Node<T> * n, std::ostream & f);
+        void pront2(Node<T> * n, std::ostream & f);
 
-        void destroyTree(Btn<T> * n);
+        void destroyTree(Node<T> * n);
 
     protected:
     private:
-        Btn<T> *root;
+        Node<T> *root;
         int sizet;
 };
 

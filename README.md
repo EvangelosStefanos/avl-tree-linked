@@ -1,8 +1,6 @@
 # avl-tree-linked
   A C++ implementation of the AVL tree data structure used as a search index for linked integers.
   
-  _Update v1.2.0_. Class template support added. Now it can be used for data types other than integers.
-
 ## Details
   A node in the AVL tree stores an integer and a separate AVL tree that includes integers linked to the node's integer. Links between integers are specified as input.
 
@@ -19,23 +17,23 @@ For convenience a total of three sample files are provided. Two of them are inpu
   [output.txt](output/ouput.txt) Each line contains an integer, the number of integers linked to that integer and the linked integers themselves.
 
 ## Usage
-  An executable will be provided with each release. The directory of the executable must also contain a directory `input` with the `commands.txt` and `input.txt` files and a directory `output` where the output text file will be saved. To use the executable, open a terminal in the directory it is located and enter `.\AvlTree_Final.exe` to run the program. Otherwise, you will have to compile the code on your own and then run it.
+  An executable will be provided with each release. The directory of the executable must also contain a directory `input` with the `commands.txt` and `input.txt` files and a directory `output` where the output text file will be saved. To use the executable, open a terminal in the directory it is located and enter `.\create_index.exe` to run the program. Otherwise, you will have to compile the code on your own and then run it.
 
   ### Includes (cpp files are required because of class templates)
   ```
-  #include "Btn.h"
-  #include "Btn.cpp"
-  #include "AvlTree.h"
-  #include "AvlTree.cpp"
+  #include "Node.h"
+  #include "Node.cpp"
+  #include "AVLtree.h"
+  #include "AVLtree.cpp"
   ```
   ### Create an empty tree
   ```
-  AvlTree<int> * tree = new AvlTree<int>();
+  AVLtree<int> * tree = new AVLtree<int>();
   ```
   ### Insert value
   ```
   int value = 5;
-  Btn<int> * node = tree->insertElement(value);
+  Node<int> * node = tree->insertElement(value);
   if(node)
   {
     std::cout << "Inserted";
@@ -53,7 +51,7 @@ For convenience a total of three sample files are provided. Two of them are inpu
   ### Search value
   ```
   int value = 5;
-  Btn<int> * node = tree->search(value);
+  Node<int> * node = tree->search(value);
   if(node)
   {
     std::cout << "Found";
@@ -63,10 +61,10 @@ For convenience a total of three sample files are provided. Two of them are inpu
   ```
   int value = 5;
   int neighbor = 6;
-  Btn<int> * node = tree->search(value);
+  Node<int> * node = tree->search(value);
   if(node)
   {
-    Btn<int> * neighborNode = node->insertNeighbor(neighbor);
+    Node<int> * neighborNode = node->insertNeighbor(neighbor);
     if(neighborNode)
     {
       std::cout << "Link inserted";
@@ -77,7 +75,7 @@ For convenience a total of three sample files are provided. Two of them are inpu
   ```
   int value = 5;
   int neighbor = 6;
-  Btn<int> * node = tree->search(value);
+  Node<int> * node = tree->search(value);
   if(node)
   {
     bool deleted = node->deleteNeighbor(neighbor);

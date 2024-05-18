@@ -14,7 +14,7 @@ For convenience a total of three sample files are provided. Two of them are inpu
   [input.txt](input/input.txt) :  Each line contains a pair of integers used to define that the second integer is linked to the first.
 
 ### Output
-  [output.txt](output/ouput.txt) Each line contains an integer, the number of integers linked to that integer and the linked integers themselves.
+  [output.txt](output/output.txt) Each line contains an integer, the number of integers linked to that integer and the linked integers themselves.
 
 ## Usage
   An executable will be provided with each release. The directory of the executable must also contain a directory `input` with the `commands.txt` and `input.txt` files and a directory `output` where the output text file will be saved. To use the executable, open a terminal in the directory it is located and enter `.\create_index.exe` to run the program. Otherwise, you will have to compile the code on your own and then run it.

@@ -1,49 +1,49 @@
 #include <iostream>
-#include "Btn.h"
-#include "AvlTree.h"
+#include "Node.h"
+#include "AVLtree.h"
 
 template <class T>
-Btn<T>::Btn(T akey)
+Node<T>::Node(T akey)
 {
   key = akey;
   balance = 0;
   leftchild = NULL;
   rightchild = NULL;
-  neighborhood = new AvlTree<T>();
+  neighborhood = new AVLtree<T>();
 }
 
 template <class T>
-Btn<T>::~Btn() { delete this->neighborhood; }
+Node<T>::~Node() { delete this->neighborhood; }
 
 template <class T>
-T Btn<T>::getKey() { return this->key; }
+T Node<T>::getKey() { return this->key; }
 
 template <class T>
-Btn<T> * Btn<T>::getLeftChild() { return this->leftchild; }
+Node<T> * Node<T>::getLeftChild() { return this->leftchild; }
 
 template <class T>
-Btn<T> * Btn<T>::getRightChild() { return this->rightchild; }
+Node<T> * Node<T>::getRightChild() { return this->rightchild; }
 
 template <class T>
-AvlTree<T> * Btn<T>::getNeighborhood() { return this->neighborhood; }
+AVLtree<T> * Node<T>::getNeighborhood() { return this->neighborhood; }
 
 template <class T>
-int Btn<T>::getBalance() { return this->balance; }
+int Node<T>::getBalance() { return this->balance; }
 
 template <class T>
-void Btn<T>::setKey(T akey) { this->key = akey; }
+void Node<T>::setKey(T akey) { this->key = akey; }
 
 template <class T>
-void Btn<T>::setLeftChild(Btn<T> * lc) { this->leftchild = lc; }
+void Node<T>::setLeftChild(Node<T> * lc) { this->leftchild = lc; }
 
 template <class T>
-void Btn<T>::setRightChild(Btn<T> * rc) { this->rightchild = rc; }
+void Node<T>::setRightChild(Node<T> * rc) { this->rightchild = rc; }
 
 template <class T>
-void Btn<T>::setBalance(int b) { this->balance = b; }
+void Node<T>::setBalance(int b) { this->balance = b; }
 
 template <class T>
-std::ostream & operator<<(std::ostream & output_stream, Btn<T> & node)
+std::ostream & operator<<(std::ostream & output_stream, Node<T> & node)
 {
   output_stream << "Node : " << node.getKey();
   if (node.getLeftChild())
@@ -62,7 +62,7 @@ std::ostream & operator<<(std::ostream & output_stream, Btn<T> & node)
 }
 
 template <class T>
-bool Btn<T>::hasNeighbor(T neighbor)
+bool Node<T>::hasNeighbor(T neighbor)
 {
   if (this->neighborhood->search(neighbor))
   {
@@ -73,13 +73,13 @@ bool Btn<T>::hasNeighbor(T neighbor)
 }
 
 template <class T>
-Btn<T> *Btn<T>::insertNeighbor(T neighbor)
+Node<T> *Node<T>::insertNeighbor(T neighbor)
 {
   return this->neighborhood->insertElement(neighbor); // Add neighbor to the neighborhood
 }
 
 template <class T>
-bool Btn<T>::deleteNeighbor(T neighbor)
+bool Node<T>::deleteNeighbor(T neighbor)
 {
   bool deleted = this->neighborhood->deleteElement(neighbor);
   if (!deleted)

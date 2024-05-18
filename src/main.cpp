@@ -1,9 +1,9 @@
 #include <iostream>
 #include <fstream>
-#include "Btn.h"
-#include "Btn.cpp"
-#include "AvlTree.h"
-#include "AvlTree.cpp"
+#include "Node.h"
+#include "Node.cpp"
+#include "AVLtree.h"
+#include "AVLtree.cpp"
 
 int main()
 {
@@ -23,7 +23,7 @@ int main()
   std::string command;
   int first;
   int second;
-  AvlTree<int> *tree = new AvlTree<int>();
+  AVLtree<int> *tree = new AVLtree<int>();
 
   while (commands_stream >> command)
   {
@@ -41,7 +41,7 @@ int main()
 
       while (input_stream >> first >> second)
       {
-        Btn<int> *node = tree->search(first);
+        Node<int> *node = tree->search(first);
         if(!node)
         {
           node = tree->insertElement(first);
@@ -55,7 +55,7 @@ int main()
     else if (command == command_insert)
     {
       commands_stream >> first >> second;
-      Btn<int> *node = tree->search(first);
+      Node<int> *node = tree->search(first);
       if (!node)
       {
         node = tree->insertElement(first);
@@ -68,7 +68,7 @@ int main()
     else if (command == command_delete)
     {
       commands_stream >> first >> second;
-      Btn<int> *node = tree->search(first);
+      Node<int> *node = tree->search(first);
       if (!node)
       {
         std::cout << "INFO: No link deleted for " << first << " and " << second << ". " << first << " was not found." << std::endl;

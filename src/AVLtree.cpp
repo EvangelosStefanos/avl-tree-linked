@@ -1,31 +1,31 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "AvlTree.h"
-#include "Btn.h"
+#include "AVLtree.h"
+#include "Node.h"
 
 using namespace std;
 
 
 //Constructors
 template <class T>
-AvlTree<T>::AvlTree()
+AVLtree<T>::AVLtree()
 {
     root = NULL;
     sizet = 0;
 }
 
 template <class T>
-AvlTree<T>::AvlTree(T r)
+AVLtree<T>::AVLtree(T r)
 {
-    this->root = new Btn<T>(r);
+    this->root = new Node<T>(r);
     sizet = 1;
 }
 
 
 //Destructor
 template <class T>
-AvlTree<T>::~AvlTree()
+AVLtree<T>::~AVLtree()
 {
     destroyTree(this->root);
 }
@@ -38,13 +38,13 @@ Given a value key, returns NULL if a node with that value doesn't
 exist in the tree, otherwise returns the node with that value.
 **/
 template <class T>
-Btn<T> * AvlTree<T>::search(T key)
+Node<T> * AVLtree<T>::search(T key)
 {
     if(!this->root)
     {
         return NULL;
     }
-    Btn<T> * sn = this->root;
+    Node<T> * sn = this->root;
     while(sn)
     {
         if(key == sn->getKey())
@@ -69,15 +69,15 @@ Given a value akey, creates a node and adds it to the tree(if no such node alrea
 Returns the node added or the one with the given value if it exists already.
 **/
 template <class T>
-Btn<T> * AvlTree<T>::insertElement(T akey)
+Node<T> * AVLtree<T>::insertElement(T akey)
 {
-    Btn<T> * snp = NULL;
-    Btn<T> * snode = this->root;
-    vector<Btn<T> * > path;
+    Node<T> * snp = NULL;
+    Node<T> * snode = this->root;
+    vector<Node<T> * > path;
 
     if(!snode) //Tree is empty
     {
-        snode = new Btn<T>(akey);
+        snode = new Node<T>(akey);
         this->sizet++; // Increase the size of the tree
         this->root = snode;
         return snode;
@@ -102,7 +102,7 @@ Btn<T> * AvlTree<T>::insertElement(T akey)
         }
     }
 
-    snode = new Btn<T>(akey);
+    snode = new Node<T>(akey);
     this->sizet++; // Increase the size of the tree
     path.push_back(snode);
 
@@ -117,9 +117,9 @@ Btn<T> * AvlTree<T>::insertElement(T akey)
 
     for(int i = path.size() - 1; i > 0; i--) //Balance tree
     {
-        Btn<T> * c = path.at(i);
-        Btn<T> * p = path.at(i-1);
-        Btn<T> * pp = NULL;
+        Node<T> * c = path.at(i);
+        Node<T> * p = path.at(i-1);
+        Node<T> * pp = NULL;
 
         if(i-2 >= 0)
             pp = path.at(i-2);
@@ -156,11 +156,11 @@ Given a value akey, deletes the node with that value(if it exists in the tree).
 Returns true if a node was deleted or false if no nodes were deleted.
 **/
 template <class T>
-bool AvlTree<T>::deleteElement(T akey)
+bool AVLtree<T>::deleteElement(T akey)
 {
-    Btn<T> * snp = NULL;
-    Btn<T> * snode = this->root;
-    vector<Btn<T> * > path;
+    Node<T> * snp = NULL;
+    Node<T> * snode = this->root;
+    vector<Node<T> * > path;
 
     while(snode)
     {
@@ -183,8 +183,8 @@ bool AvlTree<T>::deleteElement(T akey)
 
     if(snode->getLeftChild() && snode->getRightChild()) // Node to be deleted has two children.
     {
-        Btn<T> * pn = snode;                  // Father of max leftchild of snode.
-        Btn<T> * mn = snode->getLeftChild();  // max leftchild of snode.
+        Node<T> * pn = snode;                  // Father of max leftchild of snode.
+        Node<T> * mn = snode->getLeftChild();  // max leftchild of snode.
 
         while(mn->getRightChild())         // Find snode's max leftchild and its parent.
         {
@@ -199,7 +199,7 @@ bool AvlTree<T>::deleteElement(T akey)
 
     }
                                           // Node has one child or none.
-    Btn<T> * snc = NULL;                        // Child of snode.
+    Node<T> * snc = NULL;                        // Child of snode.
 
     if (snode->getLeftChild())              //Store snode's child to snc.
     {
@@ -225,9 +225,9 @@ bool AvlTree<T>::deleteElement(T akey)
 
     for(int i = path.size() - 1; i > 0; i--) //Balance tree
     {
-        Btn<T> * c = path.at(i);
-        Btn<T> * p = path.at(i-1);
-        Btn<T> * pp = NULL;
+        Node<T> * c = path.at(i);
+        Node<T> * p = path.at(i-1);
+        Node<T> * pp = NULL;
         if(i-2 >= 0)
             pp = path.at(i-2);
 
@@ -276,7 +276,7 @@ bool AvlTree<T>::deleteElement(T akey)
 
 
 template <class T>
-Btn<T> *AvlTree<T>::getRoot()
+Node<T> *AVLtree<T>::getRoot()
 {
   return this->root;
 }
@@ -286,7 +286,7 @@ Btn<T> *AvlTree<T>::getRoot()
 Given a node r, returns its height.
 **/
 template <class T>
-int AvlTree<T>::findHeight(Btn<T> *r)
+int AVLtree<T>::findHeight(Node<T> *r)
 {
     if(!r) // If node is null return -1.
         return -1;
@@ -298,7 +298,7 @@ int AvlTree<T>::findHeight(Btn<T> *r)
 Given a node r, returns its balance factor.
 **/
 template <class T>
-int AvlTree<T>::balance(Btn<T> *r)
+int AVLtree<T>::balance(Node<T> *r)
 {
     if(!r)
         return 0;
@@ -311,7 +311,7 @@ int AvlTree<T>::balance(Btn<T> *r)
 Given a node n, updates its balance factor.
 **/
 template <class T>
-void AvlTree<T>::updateBalance(Btn<T> * n)
+void AVLtree<T>::updateBalance(Node<T> * n)
 {
     n->setBalance(balance(n));
 }
@@ -321,9 +321,9 @@ void AvlTree<T>::updateBalance(Btn<T> * n)
 Left-left rotation.
 **/
 template <class T>
-void AvlTree<T>::llRotation(Btn<T> *p, Btn<T> *c, Btn<T> *pp)
+void AVLtree<T>::llRotation(Node<T> *p, Node<T> *c, Node<T> *pp)
 {
-    Btn<T> * temp = c->getRightChild();
+    Node<T> * temp = c->getRightChild();
     c->setRightChild(p);
     p->setLeftChild(temp);
 
@@ -342,9 +342,9 @@ void AvlTree<T>::llRotation(Btn<T> *p, Btn<T> *c, Btn<T> *pp)
 Left-right rotation.
 **/
 template <class T>
-void AvlTree<T>::lrRotation(Btn<T> * p, Btn<T> * c, Btn<T> * pp)
+void AVLtree<T>::lrRotation(Node<T> * p, Node<T> * c, Node<T> * pp)
 {
-    Btn<T> * temp = c->getRightChild()->getLeftChild();
+    Node<T> * temp = c->getRightChild()->getLeftChild();
     p->setLeftChild(c->getRightChild());
     p->getLeftChild()->setLeftChild(c);
     c->setRightChild(temp);
@@ -356,9 +356,9 @@ void AvlTree<T>::lrRotation(Btn<T> * p, Btn<T> * c, Btn<T> * pp)
 Right-right rotation.
 **/
 template <class T>
-void AvlTree<T>::rrRotation(Btn<T> * p, Btn<T> * c, Btn<T> * pp)
+void AVLtree<T>::rrRotation(Node<T> * p, Node<T> * c, Node<T> * pp)
 {
-    Btn<T> * temp = c->getLeftChild();
+    Node<T> * temp = c->getLeftChild();
     c->setLeftChild(p);
     p->setRightChild(temp);
 
@@ -377,9 +377,9 @@ void AvlTree<T>::rrRotation(Btn<T> * p, Btn<T> * c, Btn<T> * pp)
 Right-left rotation.
 **/
 template <class T>
-void AvlTree<T>::rlRotation(Btn<T> * p, Btn<T> * c, Btn<T> * pp)
+void AVLtree<T>::rlRotation(Node<T> * p, Node<T> * c, Node<T> * pp)
 {
-    Btn<T> * temp = c->getLeftChild()->getRightChild();
+    Node<T> * temp = c->getLeftChild()->getRightChild();
     p->setRightChild(c->getLeftChild());
     p->getRightChild()->setRightChild(c);
     c->setLeftChild(temp);
@@ -391,7 +391,7 @@ void AvlTree<T>::rlRotation(Btn<T> * p, Btn<T> * c, Btn<T> * pp)
 Performs a pre order traversal and prints every node in the tree.
 **/
 template <class T>
-void AvlTree<T>::print(Btn<T> *r)
+void AVLtree<T>::print(Node<T> *r)
 {
     if(!r)
         return;
@@ -406,7 +406,7 @@ void AvlTree<T>::print(Btn<T> *r)
 In order traversal.
 **/
 template <class T>
-void AvlTree<T>::InOrderPrint(Btn<T> *r)
+void AVLtree<T>::InOrderPrint(Node<T> *r)
 {
     if(r)
     {
@@ -421,7 +421,7 @@ void AvlTree<T>::InOrderPrint(Btn<T> *r)
 Pre order traversal.
 **/
 template <class T>
-void AvlTree<T>::PreOrderPrint(Btn<T> * r)
+void AVLtree<T>::PreOrderPrint(Node<T> * r)
 {
     if(r)
     {
@@ -436,7 +436,7 @@ void AvlTree<T>::PreOrderPrint(Btn<T> * r)
 Post order traversal.
 **/
 template <class T>
-void AvlTree<T>::PostOrderPrint(Btn<T> * r)
+void AVLtree<T>::PostOrderPrint(Node<T> * r)
 {
     if(r)
     {
@@ -451,7 +451,7 @@ void AvlTree<T>::PostOrderPrint(Btn<T> * r)
 Prints each node of a tree, the size of its neighborhood and the neighbor nodes to a file.
 **/
 template <class T>
-void AvlTree<T>::output(std::string p)
+void AVLtree<T>::output(std::string p)
 {
     ofstream f;
     f.open(p);
@@ -470,7 +470,7 @@ void AvlTree<T>::output(std::string p)
 Recurse through a tree(in order traversal), printing its nodes and the size of each node's neighborhood.
 **/
 template <class T>
-void AvlTree<T>::pront(Btn<T> * n, ostream & f)
+void AVLtree<T>::pront(Node<T> * n, ostream & f)
 {
     if(!n)
         return;
@@ -495,7 +495,7 @@ void AvlTree<T>::pront(Btn<T> * n, ostream & f)
 Recurse through a tree(in order traversal), printing its nodes to a file.
 **/
 template <class T>
-void AvlTree<T>::pront2(Btn<T> * n, ostream & f)
+void AVLtree<T>::pront2(Node<T> * n, ostream & f)
 {
     if(!n)
         return;
@@ -510,7 +510,7 @@ void AvlTree<T>::pront2(Btn<T> * n, ostream & f)
 Recurse through a tree(post order traversal) and delete every node in it.
 **/
 template <class T>
-void AvlTree<T>::destroyTree(Btn<T> * n)
+void AVLtree<T>::destroyTree(Node<T> * n)
 {
     if(n)
     {

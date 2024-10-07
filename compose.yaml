@@ -1,0 +1,7 @@
+# Docker Compose version v2.29.2
+services:
+  avl-tree-linked:
+    build: .
+    image: avl-tree-linked
+    volumes:
+      - ./app/output:/app/output

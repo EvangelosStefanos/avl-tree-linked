@@ -457,7 +457,7 @@ void AVLtree<T>::output(std::string p)
     f.open(p);
     if(!f)
     {
-        cerr<<"File problem"<<endl;
+        cerr<<"ERROR: Failed to open file: {"<<p<<"} in write mode."<<endl;
         return;
     }
 

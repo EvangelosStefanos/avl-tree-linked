@@ -4,4 +4,4 @@ services:
     build: .
     image: avl-tree-linked
     volumes:
-      - ./app/output:/app/output
+      - ./output:/app/output

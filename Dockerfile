@@ -3,7 +3,7 @@ FROM gcc:14.2.0 AS build-stage
 
 WORKDIR /app
 
-COPY app/src src/
+COPY src src/
 
 RUN g++ -Wall -fexceptions -O2  -c src/AVLtree.cpp -o ./AVLtree.o
 
@@ -22,7 +22,7 @@ FROM scratch
 
 WORKDIR /app
 
-COPY app/input/* input/
+COPY input input/
 
 COPY --from=build-stage /app/create_index .
 

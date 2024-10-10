@@ -1,87 +1,116 @@
 # avl-tree-linked
-  A C++ implementation of the AVL tree data structure used as a search index for linked integers.
+
+A C++ implementation of the AVL tree data structure used as a search index for linked integers.
   
 ## Details
-  A node in the AVL tree stores an integer and a separate AVL tree that includes integers linked to the node's integer. Links between integers are specified as input.
+
+A node in the AVL tree stores an integer and a separate AVL tree that includes integers linked to the node's integer. Links between integers are specified as input.
 
 ## Sample Files
 
 For convenience a total of three sample files are provided. Two of them are input files and the third is the output of the program.
 
 ### Input
-  [commands.txt](input/commands.txt) :  Each line contains a command the program can process. When using the READ_DATA command you must use a correct relative file path based on your current working directory.
+
+[commands.txt](input/commands.txt) :  Each line contains a command the program can process. When using the READ_DATA command you must use a correct relative file path based on your current working directory.
   
-  [input.txt](input/input.txt) :  Each line contains a pair of integers used to define that the second integer is linked to the first.
+[input.txt](input/input.txt) :  Each line contains a pair of integers used to define that the second integer is linked to the first.
 
 ### Output
-  [output.txt](output/output.txt) Each line contains an integer, the number of integers linked to that integer and the linked integers themselves.
 
-## Usage
-  An executable will be provided with each release. The directory of the executable must also contain a directory `input` with the `commands.txt` and `input.txt` files and a directory `output` where the output text file will be saved. To use the executable, open a terminal in the directory it is located and enter `.\create_index.exe` to run the program. Otherwise, you will have to compile the code on your own and then run it.
+[output.txt](output/output.txt) Each line contains an integer, the number of integers linked to that integer and the linked integers themselves.
 
-  ### Includes (cpp files are required because of class templates)
-  ```
-  #include "Node.h"
-  #include "Node.cpp"
-  #include "AVLtree.h"
-  #include "AVLtree.cpp"
-  ```
-  ### Create an empty tree
-  ```
-  AVLtree<int> * tree = new AVLtree<int>();
-  ```
-  ### Insert value
-  ```
-  int value = 5;
-  Node<int> * node = tree->insertElement(value);
-  if(node)
+## For Users
+
+### Usage
+
+To execute run:
+```
+docker compose up
+```
+Once execution has ended, the container will exit automatically. The program writes output to `/apps/output` inside the container. To get the output directory to your system run:
+```
+docker cp avl-tree-linked-avl-tree-linked-1:/app/output ./
+```
+The `output` directory will contain only one file, `output.txt`, which contains the result of the execution.
+
+## For Developers
+>New in v1.4: Rewritten as a header-only library so the only file neccessary is [AVLtree.h](src/AVLtree.h).
+
+### Includes
+
+```
+#include "AVLtree.h"
+```
+
+### Create an empty tree
+
+```
+AVLtree<int> * tree = new AVLtree<int>();
+```
+
+### Insert value
+
+```
+int value = 5;
+Node<int> * node = tree->insertElement(value);
+if(node)
+{
+  std::cout << "Inserted";
+}
+```  
+
+### Delete value
+
+```
+int value = 5;
+bool deleted = tree->deleteElement(value);
+if(deleted)
+{
+  std::cout << "Deleted";
+}
+```    
+
+### Search value
+
+```
+int value = 5;
+Node<int> * node = tree->search(value);
+if(node)
+{
+  std::cout << "Found";
+}
+
+```
+
+### Insert link
+
+```
+int value = 5;
+int neighbor = 6;
+Node<int> * node = tree->search(value);
+if(node)
+{
+  Node<int> * neighborNode = node->insertNeighbor(neighbor);
+  if(neighborNode)
   {
-    std::cout << "Inserted";
+    std::cout << "Link inserted";
   }
-  ```  
-  ### Delete value
-  ```
-  int value = 5;
-  bool deleted = tree->deleteElement(value);
+}
+```
+
+### Delete link
+
+```
+int value = 5;
+int neighbor = 6;
+Node<int> * node = tree->search(value);
+if(node)
+{
+  bool deleted = node->deleteNeighbor(neighbor);
   if(deleted)
   {
-    std::cout << "Deleted";
+    std::cout << "Link deleted";
   }
-  ```    
-  ### Search value
-  ```
-  int value = 5;
-  Node<int> * node = tree->search(value);
-  if(node)
-  {
-    std::cout << "Found";
-  }
-  ```
-  ### Insert link
-  ```
-  int value = 5;
-  int neighbor = 6;
-  Node<int> * node = tree->search(value);
-  if(node)
-  {
-    Node<int> * neighborNode = node->insertNeighbor(neighbor);
-    if(neighborNode)
-    {
-      std::cout << "Link inserted";
-    }
-  }
-  ```
-  ### Delete link
-  ```
-  int value = 5;
-  int neighbor = 6;
-  Node<int> * node = tree->search(value);
-  if(node)
-  {
-    bool deleted = node->deleteNeighbor(neighbor);
-    if(deleted)
-    {
-      std::cout << "Link deleted";
-    }
-  }
-  ```
+}
+```

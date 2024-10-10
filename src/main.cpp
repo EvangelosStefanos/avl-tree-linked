@@ -1,9 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include "Node.h"
-#include "Node.cpp"
+#include <filesystem>
 #include "AVLtree.h"
-#include "AVLtree.cpp"
 
 int main()
 {
@@ -89,6 +87,8 @@ int main()
     {
       std::string output_path;
       commands_stream >> output_path;
+      std::filesystem::path p = output_path;
+      std::filesystem::create_directories(p.parent_path());
       tree->output(output_path);
     }
   }

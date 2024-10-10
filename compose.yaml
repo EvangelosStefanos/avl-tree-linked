@@ -1,0 +1,5 @@
+# Docker Compose version v2.29.2
+services:
+  avl-tree-linked:
+    image: avl-tree-linked
+    build: .
